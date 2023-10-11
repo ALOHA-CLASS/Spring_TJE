@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<!-- DispatcherServlet Context: 이 서블릿의 요청 처리 인프라를 정의합니다. -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<!-- Spring MVC의 @Controller 프로그래밍 모델을 활성화합니다. -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- 
+		/resources/** 에 대한 HTTP GET 요청을 처리하여 
+		${webappRoot}/resources 디렉토리의 정적 자원을 효율적으로 제공합니다.
+	 -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- 
+		@Controller에서 선택한 뷰를 /WEB-INF/views 디렉토리의 .jsp 리소스로 해석합니다.
+	-->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<!-- 
+	    *컴포넌트 스캔 
+	    - @Component 어노테이션을 붙여놓은 클래스들을 찾아서 빈에 등록
+		스프링 프레임워크에서 base-package 속성에서 지정한 패키지 하위 경로의
+	    존재하는 스프링 구성요소(Component)들을 자종으로 찾아서 빈으로 등록 -->	
+	<context:component-scan base-package="com.aloha.spring" />
+	
+	
+	
+</beans:beans>
+
+
+
+
+
+
+
+
+
+

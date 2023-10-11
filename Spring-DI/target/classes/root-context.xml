@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- 모든 다른 웹 구성 요소에서 볼 수 있는 공유 자원를 정의합니다. -->
+	<!-- 
+		★빈 설정
+		- 데이터 소스 설정 : 데이터 베이스 연결 정보
+		- 보안 설정
+		- 서비스 빈 설정
+	-->
+	
+	<!-- BoardDAO 빈을 정의 -->
+    <bean id="boardDAO" class="com.aloha.spring.dao.BoardDAO">
+    </bean>
+		
+</beans>

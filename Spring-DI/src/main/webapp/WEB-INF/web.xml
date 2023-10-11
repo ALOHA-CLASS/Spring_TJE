@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 웹 컨테이너 설정 파일  -->
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<!-- 모든 서블릿과 필터에서 공유하는 루트 스프링 컨테이너의 정의 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/root-context.xml</param-value>		
+	</context-param>
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<!-- 모든 서블릿과 필터에서 공유하는 스프링 컨테이너를 생성합니다. -->
+	<!-- 스프링 프레임워크에서 웹 애플리케이션을 초기화하고, 설정 정보들을 불러오는 리스너 -->
+	<!--
+		1. 웹 애플리케이션을 초기화
+		2. 의존성 주입 기능 수행
+		3. 설정 정보 로드
+	 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Processes application requests -->
+	<!-- 애플리케이션 요청을 처리합니다. -->
+	<!-- 서블릿 등록 -->
+		<!-- DispatcherServlet : 웹 애플리케이션의 요청을 처리하는 핵심 서블릿 -->
+		<!-- - MVC  -->
+		<!-- 
+			1. 웹 요청 처리
+			2. 컨트롤러 선택
+			3. 뷰 선택
+			4. 응답 반환 
+		-->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<!-- 서블릿 요청 경로 매핑 -->	
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 인코딩 필터(한글깨짐 방지) --> 
+    <filter> 
+        <filter-name>encodingFilter</filter-name> 
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param> 
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
