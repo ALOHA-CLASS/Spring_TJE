@@ -11,8 +11,8 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.aloha.spring">
-		<level value="trace" />
+	<logger name="com.joeun.test">
+		<level value="info" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
@@ -34,7 +34,7 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="trace" />
+		<priority value="warn" />
 		<appender-ref ref="console" />
 	</root>
 	
