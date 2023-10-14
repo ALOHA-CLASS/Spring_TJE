@@ -21,40 +21,30 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<Board> list() throws Exception {
-		logger.info("게시글 목록을 조회합니다.");
-		
 		List<Board> boardList = boardDAO.list();
-		// logger.info("info");
-		// logger.error("error");
-		// logger.warn("warn");
-		int count = boardList.size();
-		logger.info("boardList 요소 개수 : " + count);
-		
-		logger.info("게시글 목록을 반환합니다.");
 		return boardList;
 	}
 
 	@Override
 	public Board select(int boardNo)  {
 		Board board = boardDAO.select(boardNo);
-//		String title = board.getTitle();
 		return board;
 	}
 
 	@Override
-	public int insert(Board board) throws Exception {
+	public Integer insert(Board board) throws Exception {
 		int result = boardDAO.insert(board);
 		return result;
 	}
 
 	@Override
-	public int update(Board board) throws Exception {
+	public Integer update(Board board) throws Exception {
 		int result = boardDAO.update(board);
 		return result;
 	}
 
 	@Override
-	public int delete(int boardNo) throws Exception {
+	public Integer delete(int boardNo) throws Exception {
 		int result = boardDAO.delete(boardNo);
 		return result;
 	}

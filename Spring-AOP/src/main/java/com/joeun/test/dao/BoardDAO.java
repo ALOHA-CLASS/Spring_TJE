@@ -19,24 +19,22 @@ public class BoardDAO {
 	}
 	
 	public Board select(int boardNo) {
-		// Board board = new Board("제목", "작성자", "내용");
-		Board board = null;
-		
+		Board board = new Board("제목", "작성자", "내용");
 		return board;
 	}
 	
 	public int insert(Board board) {
-		int result = 0;
+		int result = 1;
 		return result;
 	}
 	
 	public int update(Board board) {
-		int result = 0;
+		int result = 1;
 		return result;
 	}
 	
 	public int delete(int boardNo) {
-		int result = 0;
+		int result = 1;
 		return result;
 	}
 	

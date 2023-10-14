@@ -13,13 +13,13 @@ public interface BoardService {
 	public Board select(int boardNo);
 	
 	// 게시글 등록
-	public int insert(Board board) throws Exception;
+	public Integer insert(Board board) throws Exception;
 	
 	// 게시글 수정
-	public int update(Board board) throws Exception;
+	public Integer update(Board board) throws Exception;
 	
 	// 게시글 삭제
-	public int delete(int boardNo) throws Exception;
+	public Integer delete(int boardNo) throws Exception;
 }
 
 
