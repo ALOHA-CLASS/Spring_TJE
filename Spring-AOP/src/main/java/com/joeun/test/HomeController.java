@@ -51,12 +51,10 @@ public class HomeController {
 		Board board = boardService.select(10);
 		if( board == null ) 
 			logger.info("board null");
-		Integer result = boardService.insert(board);
 		model.addAttribute("board", board);
 		
-		
 		// 게시글 등록 요청
-//		board = new Board("제목","내용","작성자");
+		Integer result = boardService.insert(board);
 		
 		return "home";
 	}
