@@ -67,7 +67,8 @@ public class BoardController {
 	 */
 	// @RequestParam("파라미터명")  : 요청 파라미터를 매핑하는 어노테이션 
 	// @RequestMapping("/read")	// 메소드 레벨 요청 경로 매핑
-	@RequestMapping(value ="/read", method = RequestMethod.GET, params = "boardNo")  // 요청파라미터 매핑
+	// 다중 경로 매핑 : {"경로1", "경로2"}
+	@RequestMapping(value ={"/read", "/select"}, method = RequestMethod.GET, params = "boardNo")  // 요청파라미터 매핑
 	public String read(@RequestParam("boardNo") int boardNo, Model model) {
 		logger.info("boardNo : " + boardNo);
 		// 게시글 데이터 요청
@@ -87,7 +88,10 @@ public class BoardController {
 	 * @return
 	 */
 	@RequestMapping(value ="/{boardNo}", method = RequestMethod.GET)  // 경로 패턴 매핑
-	public String readPath(@PathVariable("boardNo") int boardNo, Model model) {
+	// public String readPath(@PathVariable("boardNo") int boardNo, Model model) {
+	// @PathVariable("요청파라미터명") 메소드매개변수명
+	// * 요청파라미터명 = 메소드매개변수명 같으면, () 는 생략해도 된다.
+	public String readPath(@PathVariable int boardNo, Model model) {
 		logger.info("boardNo : " + boardNo);
 		// 게시글 데이터 요청
 		Board board = boardService.select(boardNo);
