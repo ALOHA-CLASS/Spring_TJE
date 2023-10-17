@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.joeun</groupId>
 	<artifactId>test</artifactId>
-	<name>Spring-Version</name>
+	<name>Spring-JDBC</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -94,7 +94,6 @@
 		</dependency>
 				
 		<!-- Servlet -->
-		<!-- 서블릿 버전 : 2.5 → 3.1 -->
 <!-- 		<dependency> -->
 <!-- 			<groupId>javax.servlet</groupId> -->
 <!-- 			<artifactId>servlet-api</artifactId> -->
@@ -127,6 +126,31 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>        
+		
+		<!-- mysql 드라이버 -->
+		<dependency>
+		    <groupId>com.mysql</groupId>
+		    <artifactId>mysql-connector-j</artifactId>
+		    <version>8.1.0</version>
+		</dependency>
+		
+		
+		<!-- Spring JDBC -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.30</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		
 	</dependencies>
     <build>
         <plugins>
