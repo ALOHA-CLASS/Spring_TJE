@@ -2,12 +2,15 @@ package com.joeun.test.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.joeun.test.dto.Board;
 import com.joeun.test.dto.User;
+import com.joeun.test.service.BoardService;
 
 @Controller
 @RequestMapping("/request")
@@ -27,7 +31,7 @@ public class RequestController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(RequestController.class);
 	
-	
+	// 업로드 경로
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 	
@@ -142,6 +146,21 @@ public class RequestController {
 		return "SUCCESS";
 	}
 	
+	// Map 
+	@ResponseBody
+	@RequestMapping("/map")
+	public String requestMap(@RequestParam Map<String, String> map) {
+		String name = map.get("name");
+		String age = map.get("age");
+		
+		logger.info("name : " + name);
+		logger.info("age : " + age);
+		return "SUCCESS";
+	}
+	
+	
+	
+	
 	// 파일 업로드
 	@ResponseBody
 	@RequestMapping("/file")
@@ -169,13 +188,112 @@ public class RequestController {
 	}
 	
 	
+	// 다중 파일 업로드
+	@ResponseBody
+	@RequestMapping("/file/multi")
+	public String fileUpload(@RequestParam("file") MultipartFile[] fileList) throws IOException {
+	// public String fileUpload(@RequestParam("file") List<MultipartFile> fileList) throws IOException {
+		logger.info("/request/file/multi");
+		logger.info("uploadPath : " + uploadPath);
+		if( fileList == null ) return "FAIL";
+		
+		// if( !fileList.isEmpty() ) 
+		if( fileList.length > 0 ) 
+			for (MultipartFile file : fileList) {
+				logger.info("originalFileName : " + file.getOriginalFilename());
+				logger.info("size : " + file.getSize());
+				logger.info("contentType : " + file.getContentType());
+				
+				byte[] fileData = file.getBytes();
+				
+				String filePath = uploadPath;
+				String fileName = file.getOriginalFilename();
+				File uploadFile = new File(filePath, fileName);
+				FileCopyUtils.copy(fileData, uploadFile);			// 파일 업로드	
+			}
+		return "SUCCESS";
+	}
+
+	
+	// 게시판 파일 업로드
+	@ResponseBody
+	@RequestMapping("/file/board")
+	public String fileUploadBoard(Board board) throws IOException {
+		logger.info("/request/file/board");
+		logger.info("uploadPath : " + uploadPath);
+		logger.info(board.toString());
+		
+		List<MultipartFile> fileList = board.getFile();
+		
+		if( fileList == null ) return "FAIL";
+		
+		if( !fileList.isEmpty() ) 
+			for (MultipartFile file : fileList) {
+				logger.info("originalFileName : " + file.getOriginalFilename());
+				logger.info("size : " + file.getSize());
+				logger.info("contentType : " + file.getContentType());
+				
+				byte[] fileData = file.getBytes();
+				
+				String filePath = uploadPath;
+				String fileName = file.getOriginalFilename();
+				File uploadFile = new File(filePath, fileName);
+				FileCopyUtils.copy(fileData, uploadFile);			// 파일 업로드
+			}
+		return "SUCCESS";
+	}
+	
+	
 	
 	// AJAX 파일 업로드
-	// 이어서...
+	@RequestMapping("/ajax")
+	public String ajaxUpload() {
+		
+		
+		return "request/ajax";			// view : request/ajax.jsp
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/ajax", method = RequestMethod.POST)
+	public String ajaxUploadPost(Board board) throws IOException {
+		logger.info("/request/ajax");
+		logger.info("uploadPath : " + uploadPath);
+		logger.info(board.toString());
+		
+		List<MultipartFile> fileList = board.getFile();
+		
+		if( fileList == null ) return "FAIL";
+		
+		if( !fileList.isEmpty() ) 
+			for (MultipartFile file : fileList) {
+				logger.info("originalFileName : " + file.getOriginalFilename());
+				logger.info("size : " + file.getSize());
+				logger.info("contentType : " + file.getContentType());
+				
+				byte[] fileData = file.getBytes();
+				
+				String filePath = uploadPath;
+				String fileName = file.getOriginalFilename();
+				File uploadFile = new File(filePath, fileName);
+				FileCopyUtils.copy(fileData, uploadFile);			// 파일 업로드
+			}
+		return "SUCCESS";
+	}
+	
 	
 	
 
 }
+
+
+
+
+
+
+
+
+
 
 
 

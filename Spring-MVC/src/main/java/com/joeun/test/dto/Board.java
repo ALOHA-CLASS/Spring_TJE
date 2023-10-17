@@ -1,7 +1,13 @@
 package com.joeun.test.dto;
 
 import java.util.Date;
+import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import lombok.Data;
+
+@Data
 public class Board {
 
 	private int boardNo;
@@ -11,6 +17,8 @@ public class Board {
 	private Date regDate;
 	private Date updDate;
 	
+	private List<MultipartFile> file;
+
 	public Board() {
 		
 	}
@@ -20,61 +28,6 @@ public class Board {
 		this.writer = writer;
 		this.content = content;
 	}
-
-	public int getBoardNo() {
-		return boardNo;
-	}
-
-	public void setBoardNo(int boardNo) {
-		this.boardNo = boardNo;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getWriter() {
-		return writer;
-	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public Date getRegDate() {
-		return regDate;
-	}
-
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
-	}
-
-	public Date getUpdDate() {
-		return updDate;
-	}
-
-	public void setUpdDate(Date updDate) {
-		this.updDate = updDate;
-	}
-
-	@Override
-	public String toString() {
-		return "Board [boardNo=" + boardNo + ", title=" + title + ", writer=" + writer + ", content=" + content
-				+ ", regDate=" + regDate + ", updDate=" + updDate + "]";
-	}
-	
 	
 	
 	
