@@ -1,5 +1,6 @@
 package com.joeun.test.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -34,17 +35,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	// 회원 가입(등록)
-	@Transactional			// 트랜잭션 적용 어노테이션 
+	@Transactional(rollbackFor = SQLException.class)			// 트랜잭션 적용 어노테이션 
 	@Override
-	public Integer insert(User user) throws Exception {
+	public Integer insert(User user) {
 		int result = userDAO.insert(user);
 		
 		// 회원 권한 등록
 		UserAuth userAuth = new UserAuth();
 		userAuth.setAuth("ROLE_USER");
 		userAuth.setUserId(user.getUserId());
-		userDAO.insertAuth(userAuth);
-		
+		int result2 = userDAO.insertAuth(userAuth);
+	
 		return result;
 	}
 

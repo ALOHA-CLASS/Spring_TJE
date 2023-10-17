@@ -150,6 +150,19 @@
 		    <scope>provided</scope>
 		</dependency>
 		
+		<!-- CGLIB -->
+		<dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>3.1</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib-nodep</artifactId>
+		    <version>3.1</version>
+		</dependency>
+		
 		
 	</dependencies>
     <build>

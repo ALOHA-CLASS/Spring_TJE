@@ -141,11 +141,7 @@ public class UserDAO {
 		Object[] args = new Object[] {userAuth.getUserId(), userAuth.getAuth()};
 
 		int result = 0;
-		try {
-			result = jdbcTemplate.update(sql, args);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		result = jdbcTemplate.update(sql, args);
 		return result;
 	}
 	
