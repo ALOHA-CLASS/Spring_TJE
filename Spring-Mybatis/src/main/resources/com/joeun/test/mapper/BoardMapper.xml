@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace="매퍼 인터페이스 경로" -->
+<mapper namespace="com.joeun.test.mapper.BoardMapper">
+    
+    <!-- select -->
+    <select id="list" resultType="com.joeun.test.dto.Board">
+        SELECT board_no 'boardNo'
+              ,title
+              ,writer
+              ,content
+              ,reg_date 'regDate'
+              ,upd_date 'updDate'
+              ,views
+        FROM board
+    </select>
+    
+    <!-- insert -->
+    <insert id="insert">
+        INSERT INTO board (title, writer, content )
+        VALUES (#{title}, #{writer}, #{content} )
+    </insert>
+    
+    <!-- select -->
+    <select id="select" resultType="com.joeun.test.dto.Board">
+        SELECT board_no 'boardNo'
+              ,title
+              ,writer
+              ,content
+              ,reg_date 'regDate'
+              ,upd_date 'updDate'
+              ,views
+        FROM board 
+        WHERE board_no = #{boardNo}
+    </select>
+    
+    <!-- update -->
+    <update id="update">
+        UPDATE board
+        SET title = #{title}, writer = #{writer}, content = #{content}
+        WHERE board_no = #{boardNo}
+    </update>
+    
+    <!-- delete -->
+    <delete id="delete">
+        DELETE FROM board WHERE board_no = #{boardNo}
+    </delete>
+	
+</mapper>
