@@ -23,7 +23,16 @@
 	
 	<context:component-scan base-package="com.joeun.test" />
 	
+	<!-- ✅ MultipartResolver 빈 등록 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+	</beans:bean>
 	
+	
+	<!-- ✅ 업로드 경로 빈 등록 -->
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="C:\\upload">
+		</beans:constructor-arg>
+	</beans:bean>
 	
 </beans:beans>
 

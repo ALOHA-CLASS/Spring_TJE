@@ -1,23 +1,24 @@
 package com.joeun.test.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -65,8 +66,15 @@ public class ResponseController {
 	}
 	
 	
+	/**
+	 * 요청 경로  : /response/model/view
+	 * 응답 	   : /reponse/index.jsp 
+	 * @return
+	 */
 	@RequestMapping("/model/view")
 	public ModelAndView responseModeAndView() {
+		// ModelAndView 
+		// 뷰와 모델 데이터를 지정하여 함께 반환 처리할 수 있는 스프링프레임워크 클래스
 		logger.info("ModelAndView 타입 - /response/model/view");
 		logger.info("/response/index.jsp 뷰를 응답");
 		logger.info("모델과 뷰를 ModelAndView 객체에 지정하여 응답");
@@ -84,7 +92,8 @@ public class ResponseController {
 	}
 	
 	/**
-	 *
+	 * 요청 경로  : /response/data/board
+	 * 응답 	   : board (JSON/XML)
 	 * @ResponseBody : 응답하는 데이터를 응답 메시지의 body(본문) 에 지정하는 어노테이션
 	 * @return
 	 */
@@ -138,7 +147,7 @@ public class ResponseController {
 		// ResponseEntity<Void>
 		// : 헤더정보, 상태코드를 지정하여 사용할 수 있다.
 		// HttpStatus 열거타입
-		// : 상태코드를 가지고 있는 스프링프레임웤의 열거타입
+		// : 상태코드를 가지고 있는 스프링프레임워크의 열거타입
 		// - OK 						: 200
 		// - NOT_FOUND 					: 404
 		// - INTERNAL_SERVER_ERROR		: 500
@@ -195,11 +204,15 @@ public class ResponseController {
 	 */
 	@ResponseBody
 	@RequestMapping("/data/file")
-	public ResponseEntity<byte[]> responseFile() throws Exception {
+	public ResponseEntity<byte[]> responseFile(HttpServletRequest request) throws Exception {
+		
+		String path = request.getServletContext().getRealPath("/WEB-INF/upload/test.png");
+		logger.info("path : " + path);
 		
 		// 파일 경로
-		String filePath = "E:\\TJE\\UPLOAD\\test.jpg";
-		String fileName = "test.jpg";
+		// String filePath = "E:\\TJE\\UPLOAD\\test.jpg";
+		String filePath = request.getServletContext().getRealPath("/WEB-INF/upload/test.png");
+		String fileName = "test.png";
 		// 헤더정보
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType( MediaType.IMAGE_JPEG );						// 이미지로 응답

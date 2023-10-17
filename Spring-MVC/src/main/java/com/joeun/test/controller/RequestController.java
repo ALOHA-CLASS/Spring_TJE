@@ -3,6 +3,7 @@ package com.joeun.test.controller;
 import java.io.File;
 import java.io.IOException;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -25,6 +26,10 @@ import com.joeun.test.dto.User;
 public class RequestController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(RequestController.class);
+	
+	
+	@Resource(name = "uploadPath")
+	private String uploadPath;
 	
 	@RequestMapping(value = "/board", method = RequestMethod.GET)
 	public String request() {
@@ -138,9 +143,12 @@ public class RequestController {
 	}
 	
 	// 파일 업로드
+	@ResponseBody
 	@RequestMapping("/file")
 	public String fileUpload(MultipartFile file) throws IOException {
 		logger.info("/request/file");
+		logger.info("uploadPath : " + uploadPath);
+		if( file == null ) return "FAIL";
 		
 		logger.info("originalFileName : " + file.getOriginalFilename());
 		logger.info("size : " + file.getSize());
@@ -149,7 +157,8 @@ public class RequestController {
 		byte[] fileData = file.getBytes();
 		
 		// 파일 업로드
-		String filePath = "E:\\TJE\\UPLOAD";
+		// String filePath = "E:\\TJE\\UPLOAD";
+		String filePath = uploadPath;
 		String fileName = file.getOriginalFilename();
 		File uploadFile = new File(filePath, fileName);
 		FileCopyUtils.copy(fileData, uploadFile);			// 파일 업로드	

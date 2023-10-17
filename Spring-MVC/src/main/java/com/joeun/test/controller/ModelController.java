@@ -31,7 +31,7 @@ public class ModelController {
 	public String person(Model model, Person person) {
 		// Model 인터페이스의 addAttribute() 메소드로 데이터를 등록하여, 뷰에 전달한다.
 		// Model 
-		// : 컨트로럴에서 등록한 데이터를 뷰에 전달하는 인터페이스
+		// : 컨트롤러에서 등록한 데이터를 뷰에 전달하는 인터페이스
 //		Person person = new Person();
 //		person.setName("김조은");
 //		person.setAge(20);
@@ -74,6 +74,7 @@ public class ModelController {
 	// public String personPost(Model model, String name, int age) {
 	public String personPost(Model model, Person person, RedirectAttributes rttr) {
 		// @RequestParam("요청파라미터명") 데이터타입 메소드매개변수명
+		// : 요청 매개변수(parameter)를 메소드의 매개변수로 바인딩하는 어노테이션
 		// * 요청파라미터명 = 메소드매개변수명 일치하면, 생략가능
 		// RedirectAttributes 인터페이스
 		// : 리다이렉트 방식으로 페이지 이동 시, 일회성으로 데이터를 전달하는 인터페이스
